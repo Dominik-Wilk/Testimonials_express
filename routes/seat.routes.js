@@ -11,11 +11,14 @@ const seatSchema = Joi.object({
   seat: Joi.number().required(),
 });
 
-router.get('/seats', validateInput(seatSchema), (req, res) => {
+router.get('/seats', (req, res) => {
+  const { client } = req.body;
+
   res.json(db.seats);
 });
 
-router.get('/seats/:id', validateInput(seatSchema), (req, res) => {
+router.get('/seats/:id', (req, res) => {
+  const { client } = req.body;
   const seatId = parseInt(req.params.id, 10);
   const seat = db.seats.find(item => item.id === seatId);
 

@@ -10,30 +10,20 @@ const testimonialSchema = Joi.object({
   text: Joi.string().required(),
 });
 
-router.get(
-  '/testimonials/random',
-  validateInput(testimonialSchema),
-  (req, res) => {
-    res.json(
-      db.testimonials[Math.floor(Math.random() * db.testimonials.length)]
-    );
-  }
-);
+router.get('/testimonials/random', (req, res) => {
+  res.json(db.testimonials[Math.floor(Math.random() * db.testimonials.length)]);
+});
 
-router.get('/testimonials', validateInput(testimonialSchema), (req, res) => {
+router.get('/testimonials', (req, res) => {
   res.json(db.testimonials);
 });
 
-router.get(
-  '/testimonials/:id',
-  validateInput(testimonialSchema),
-  (req, res) => {
-    const testimonialId = parseInt(req.params.id, 10);
-    const testimonial = db.testimonials.find(item => item.id === testimonialId);
+router.get('/testimonials/:id', (req, res) => {
+  const testimonialId = parseInt(req.params.id, 10);
+  const testimonial = db.testimonials.find(item => item.id === testimonialId);
 
-    res.json(testimonial);
-  }
-);
+  res.json(testimonial);
+});
 
 router.post('/testimonials', validateInput(testimonialSchema), (req, res) => {
   const { author, text } = req.body;

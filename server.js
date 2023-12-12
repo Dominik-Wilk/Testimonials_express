@@ -1,11 +1,16 @@
 const express = require('express');
 const app = express();
-const joi = require('joi');
+const cors = require('cors');
 
 const testimonialsRoutes = require('./routes/testimonial.routes');
 const concertsRoutes = require('./routes/concert.routes');
 const seatsRoutes = require('./routes/seat.routes');
 
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  })
+);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/api', testimonialsRoutes);

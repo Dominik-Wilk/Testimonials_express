@@ -11,11 +11,11 @@ const concertSchema = Joi.object({
   price: Joi.number().required(),
 });
 
-router.get('/concerts', validateInput(concertSchema), (req, res) => {
+router.get('/concerts', (req, res) => {
   res.json(db.concerts);
 });
 
-router.get('/concerts/:id', validateInput(concertSchema), (req, res) => {
+router.get('/concerts/:id', (req, res) => {
   const concertId = parseInt(req.params.id, 10);
   const concert = db.concerts.find(item => item.id === concertId);
 
